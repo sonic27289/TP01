@@ -1,0 +1,85 @@
+#include <iostream>
+#include <time.h>
+#include <stdlib.h>
+#include <string>
+using namespace std;
+
+string pegacarta(string* baralhos)
+
+{
+	int indice;
+	string carta;
+	do
+	{
+		indice = rand() % 104;
+		carta = baralhos[indice];
+	} while (carta == "");
+	baralhos[indice] = "";
+	return carta;
+}
+
+int main(int argc, char** argv)
+{
+	cout << "Notacao: 2-99-B " << endl;
+	cout << endl;
+	cout << "2  -> Naipe (1-Copas / 2-Paus / 3-Ouro / 4-Espada)" << endl;
+	cout << endl;
+	cout << "99 -> Numero da carta (01-As / 13-Rei)" << endl;
+	cout << endl;
+	cout << "B  -> Baralho (1 ou 2)" << endl;
+	cout << endl;
+
+	string* baralhos = new string [104];
+
+	int indice = 0;
+	for (int baralho = 1; baralho <= 2; baralho++)
+	{
+		for (int naipe = 1; naipe <= 4; naipe++)
+		{
+			for (int carta = 1; carta <= 13; carta++)
+			{
+				baralhos[indice++] = to_string(naipe) + "-" + to_string(carta) + "-" + to_string(baralho);
+			}
+		}
+	}
+
+	string jogador1[11], jogador2[11], jogador3[11], jogador4[11];
+	srand(time(0));
+
+	cout << "Primeiro Jogador " << endl;
+
+	for (int i = 1; i <= 11; i++)
+	{
+		jogador1[i - 1] = pegacarta(baralhos);
+		cout << jogador1[i - 1] << endl;
+	}
+
+	cout << endl;
+	cout << "Segundo Jogador " << endl;
+
+	for (int i = 1; i <= 11; i++)
+	{
+		jogador2[i - 1] = pegacarta(baralhos);
+		cout << jogador2[i - 1] << endl;
+	}
+
+	cout << endl;
+	cout << "Terceiro Jogador " << endl;
+
+	for (int i = 1; i <= 11; i++)
+	{
+		jogador3[i - 1] = pegacarta(baralhos);
+		cout << jogador3[i - 1] << endl;
+	}
+
+	cout << endl;
+	cout << "Quarto Jogador " << endl;
+
+	for (int i = 1; i <= 11; i++)
+	{
+		jogador4[i - 1] = pegacarta(baralhos);
+		cout << jogador4[i - 1] << endl;
+	}
+
+	return 0;
+}

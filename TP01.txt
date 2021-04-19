@@ -1,0 +1,101 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main(int argc, char** argv){
+	int opcao; 	
+	vector<vector<string> > cadeiras(15, vector<string>(40, "."));
+	do
+	{
+		cout << endl;	
+		cout << "0 - Finalizar. " << endl;
+		cout << "1 - Reservar poltrona. " << endl;
+		cout << "2 - Mapa de ocupação. " << endl;
+		cout << "3 - Faturamento. " << endl;
+	 
+	   	cin >> opcao;
+	   	cout << endl;
+		
+		switch(opcao)
+		{
+		case 1:
+			int poltrona ;
+			int fileira ;
+			
+		   	cout << " Digite sua Poltrona: " << endl;
+			cin >> poltrona;
+			cout << endl;
+			cout << " Digite sua Fileira: " << endl;
+			cin >> fileira;
+			cout << endl;	
+			
+	   		if(poltrona <1 || poltrona >40)
+			   {
+			   	cout << "Poltrona Invalida! " << endl;
+			   	break;
+			   }
+			   
+			if(fileira <1 || fileira >15)
+			{
+				cout << "Fileira Invalida! " << endl;
+				break;
+			}   
+			if(cadeiras[fileira -1][poltrona -1] == "#" )
+			{
+		   		cout << "A Poltrona esta Ocupada! " << endl;
+			}
+			else
+			{
+		   		cadeiras[fileira -1][poltrona -1] = "#";
+		   	   	cout << "A Poltrona foi reservada com sucesso! " << endl;
+			}
+			break;
+		case 2:
+			for (int i=0; i<cadeiras.size(); i++)
+			{
+				for (int j=0; j<cadeiras[i].size(); j++)
+				{
+				cout << cadeiras[i][j] << " ";
+				}
+				cout << endl;
+			}
+			break;
+		case 3:
+			int quantidade = 0;	
+			int valortotal = 0;
+			for (int i=0; i<cadeiras.size(); i++)
+			{
+				for (int j=0; j<cadeiras[i].size(); j++)
+				{
+					if(cadeiras[i][j] == "#")
+					{
+						quantidade++;
+						if(i <= 4)
+						{
+							valortotal += 50;  	
+						}
+						else if(i > 4 && i <= 9)
+						{
+							valortotal += 30;
+						}
+						else
+						{
+							valortotal += 15;
+						}
+						
+					}
+				}
+			}
+			cout << endl;
+			cout << "Quantidade de lugares ocupados: " << quantidade << endl;
+			cout << "Valor da bilheteria: R$ " << valortotal << endl;
+			break;
+		}      
+	
+		
+	   
+	
+	} while(opcao != 0);
+	
+	return 0;	
+}
